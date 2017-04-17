@@ -1,0 +1,13 @@
+(ns web-app.sup)
+
+(defn start-link []
+  (supervisor/start_link.e #erl[:local :web-app.sup]
+                           :web-app.sup
+                           #erl()))
+
+(defn init [args]
+  (let [sup-flags   #erl{:strategy :one_for_one
+                         :intensity 1
+                         :period 5}
+        child-specs #erl()]
+    #erl[:ok #erl[sup-flags child-specs]]))

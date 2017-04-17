@@ -1,0 +1,9 @@
+(ns web-app.app
+  (:require [web-app.sup :as sup]))
+
+(defn start [type args]
+  (sup/start-link)
+  #erl[:ok (erlang/self.e)])
+
+(defn stop [state]
+  state)
