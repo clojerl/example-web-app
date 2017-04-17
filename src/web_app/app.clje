@@ -17,7 +17,7 @@
 (defn ->proplist [m]
   (->list (map into-tuple m)))
 
-(def routes {"_" [["/" :web-app.root nil]]})
+(def routes {:_ [["/" :web-app.root nil]]})
 
 (defn- route->cowboy [[host handlers]]
   #erl[host (->list (map into-tuple handlers))])
@@ -27,5 +27,5 @@
         dispatch (cowboy_router/compile.e routes)
         acceptors 100
         port (->proplist {:port 8080})
-        opts (->proplist {:env {:dipatch dispatch}})]
-    (cowboy/start_http.e :web-app.listener 100 port opts)))
+        opts (->proplist {:env (->proplist {:dispatch dispatch})})]
+    (cowboy/start_http.e :web-app.listener acceptors port opts)))
