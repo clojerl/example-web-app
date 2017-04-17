@@ -1,3 +1,0 @@
-{ application, web_app
-, [{vsn, git}]
-}.
