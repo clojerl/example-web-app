@@ -1,9 +1,31 @@
 (ns web-app.app
   (:require [web-app.sup :as sup]))
 
+(declare start-cowboy)
+
 (defn start [type args]
+  (start-cowboy)
   (sup/start-link)
   #erl[:ok (erlang/self.e)])
 
 (defn stop [state]
   state)
+
+(defn ->list [s]
+  (clj_rt/to_list.1 s))
+
+(defn ->proplist [m]
+  (->list (map into-tuple m)))
+
+(def routes {"_" [["/" :web-app.root nil]]})
+
+(defn- route->cowboy [[host handlers]]
+  #erl[host (->list (map into-tuple handlers))])
+
+(defn start-cowboy []
+  (let [routes (->list (map route->cowboy routes))
+        dispatch (cowboy_router/compile.e routes)
+        acceptors 100
+        port (->proplist {:port 8080})
+        opts (->proplist {:env {:dipatch dispatch}})]
+    (cowboy/start_http.e :web-app.listener 100 port opts)))

@@ -1,7 +1,12 @@
 { application, 'web-app'
 , [ {vsn, git}
   , {modules, []}
-  , {applications, [stdlib, kernel]}
+  , { applications
+    , [ stdlib
+      , kernel
+      , cowboy
+      ]
+    }
   , {mod, {'web-app.app', []}}
   ]
 }.
