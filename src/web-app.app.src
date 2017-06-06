@@ -1,10 +1,12 @@
 { application, 'web-app'
 , [ {vsn, git}
+  , {description, "Simple Clojerl Cowboy web app"}
   , {modules, []}
   , { applications
     , [ stdlib
       , kernel
       , cowboy
+      , clojerl
       ]
     }
   , {mod, {'web-app.app', []}}

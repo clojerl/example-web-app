@@ -1,0 +1,5 @@
+-sname web-app
+
+-setcookie web-app
+
+-mode interactive
