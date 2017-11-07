@@ -8,7 +8,7 @@
 
 (defn handle
   [req state]
-  (let* [#erl[:ok, req] (cowboy_req/reply.e 200 #erl() message req)]
+  (let* [#erl[:ok, req] (cowboy_req/reply 200 #erl() message req)]
     #erl[:ok req state]))
 
 (defn terminate

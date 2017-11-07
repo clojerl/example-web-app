@@ -21,7 +21,7 @@ To start the REPL just run:
 
 Now we can start the `web-app` application:
 
-    clje.user=> (application/ensure_all_started.e :web-app)
+    clje.user=> (application/ensure_all_started :web-app)
     #erl[:ok #erl(:ranch :cowlib :cowboy :web-app)]
     clje.user=>
 
