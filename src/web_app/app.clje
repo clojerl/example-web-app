@@ -24,8 +24,8 @@
 
 (defn start-cowboy []
   (let [routes (->list (map route->cowboy routes))
-        dispatch (cowboy_router/compile routes)
+        dispatch (#erl cowboy_router/compile routes)
         acceptors 100
         port (->proplist {:port 8080})
         opts (->proplist {:env (->proplist {:dispatch dispatch})})]
-    (cowboy/start_http :web-app.listener acceptors port opts)))
+    (#erl cowboy/start_http :web-app.listener acceptors port opts)))
