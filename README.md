@@ -35,5 +35,5 @@ in the `web-app.root` namespace.
 
     clje.user=> (ns web-app.root)
     nil
-    clje.user=> (def message "Hello Nurse!")
+    web-app.root=> (def message "Hello Universe!")
     #'web-app.root/message
