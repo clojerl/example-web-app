@@ -20,6 +20,7 @@
         dispatch (cowboy_router/compile routes)
         port (->proplist {:port 8080})
         opts #erl{:env #erl{:dispatch dispatch}}]
+    (println "Starting Cowboy server on port 8080")
     (#erl cowboy/start_clear :web-app.listener port opts)))
 
 (defn start [type args]

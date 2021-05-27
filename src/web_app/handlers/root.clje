@@ -4,7 +4,7 @@
 
 (defn init
   [req state]
-  ;; (println req)
+  (println "Received request:" req)
   (let [response (#erl cowboy_req/reply 200 #erl{} message req)]
     #erl[:ok response state]))
 
