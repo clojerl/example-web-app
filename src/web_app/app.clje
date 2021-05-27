@@ -1,6 +1,5 @@
 (ns web-app.app
-  (:require [web-app.sup :as sup])
-  (:import ))
+  (:require [web-app.sup :as sup]))
 
 (defn stop [state]
   state)
