@@ -1,9 +1,6 @@
 (ns web-app.app
   (:require [web-app.sup :as sup]))
 
-(defn stop [state]
-  state)
-
 (defn ->list [s]
   (clj_rt/to_list.1 s))
 
@@ -21,9 +18,20 @@
         port (->proplist {:port 8080})
         opts #erl{:env #erl{:dispatch dispatch}}]
     (println "Starting Cowboy server on port 8080")
+    ;; starts a Cowboy listener named :web-app.listener
     (#erl cowboy/start_clear :web-app.listener port opts)))
 
-(defn start [type args]
+;; `application` behavior lifecycle callbacks
+;; http://erlang.org/doc/man/application.html
+
+(defn stop
+  "http://erlang.org/doc/apps/kernel/application.html#Module:stop-1"
+  [state]
+  state)
+
+(defn start
+  "http://erlang.org/doc/apps/kernel/application.html#Module:start-2"
+  [type args]
   (start-cowboy)
   (sup/start-link)
   #erl[:ok (erlang/self)])
