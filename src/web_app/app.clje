@@ -1,12 +1,6 @@
 (ns web-app.app
-  (:require [web-app.sup :as sup]))
-
-(declare start-cowboy)
-
-(defn start [type args]
-  (start-cowboy)
-  (sup/start-link)
-  #erl[:ok (erlang/self)])
+  (:require [web-app.sup :as sup])
+  (:import ))
 
 (defn stop [state]
   state)
@@ -24,8 +18,12 @@
 
 (defn start-cowboy []
   (let [routes (->list (map route->cowboy routes))
-        dispatch (#erl cowboy_router/compile routes)
-        acceptors 100
+        dispatch (cowboy_router/compile routes)
         port (->proplist {:port 8080})
-        opts (->proplist {:env (->proplist {:dispatch dispatch})})]
-    (#erl cowboy/start_http :web-app.listener acceptors port opts)))
+        opts #erl{:env #erl{:dispatch dispatch}}]
+    (#erl cowboy/start_clear :web-app.listener port opts)))
+
+(defn start [type args]
+  (start-cowboy)
+  (sup/start-link)
+  #erl[:ok (erlang/self)])

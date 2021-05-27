@@ -3,13 +3,10 @@
 (def message "Hello World!")
 
 (defn init
-  [_type req _opts]
-  #erl[:ok req nil])
-
-(defn handle
   [req state]
-  (let* [#erl[:ok, req] (#erl cowboy_req/reply 200 #erl() message req)]
-    #erl[:ok req state]))
+  ;; (println req)
+  (let [response (#erl cowboy_req/reply 200 #erl{} message req)]
+    #erl[:ok response state]))
 
 (defn terminate
   [reason req state]
