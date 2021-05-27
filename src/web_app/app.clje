@@ -26,7 +26,3 @@
   (start-cowboy)
   (sup/start-link)
   #erl[:ok (erlang/self)])
-
-(defn -main []
-  (application/ensure_all_started :web-app)
-  (receive*))
