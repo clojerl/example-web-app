@@ -1,7 +1,7 @@
 # Example web application
 
-This is a very simple web application that shows how to set up a
-Clojerl project at this very early stages.
+This is a very basic web application that shows how to set up a
+Clojerl project at this very early stage.
 
 It uses the `rebar3_clojerl` plugin to compile and to bring up a REPL.
 
@@ -20,7 +20,7 @@ This will start the application on port 8080. To use the REPL, use
     cd example-web-app
     rebar3 clojerl compile
 
-To start the REPL just run:
+To start the REPL, run:
 
     rebar3 clojerl repl
     ===> Verifying dependencies...
@@ -39,7 +39,7 @@ You should see a `Hello World!` when browsing to
 
 ## Playing around in the REPL
 
-Changing the message shown is as easy as redefining the `message` var
+Changing the message shown can be done by redefining the `message` var
 in the `web-app.root` namespace.
 
     clje.user=> (ns web-app.root)
