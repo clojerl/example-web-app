@@ -5,6 +5,15 @@ Clojerl project at this very early stages.
 
 It uses the `rebar3_clojerl` plugin to compile and to bring up a REPL.
 
+## Quickstart with Docker Compose
+
+    docker-compose up
+
+This will start the application on port 8080. To use the REPL, use
+`docker-compose run`.
+
+    docker-compose run --rm server rebar3 clojerl repl
+
 ## Build
 
     git clone https://github.com/clojerl/example-web-app
