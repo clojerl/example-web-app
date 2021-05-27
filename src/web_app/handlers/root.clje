@@ -1,4 +1,4 @@
-(ns web-app.root)
+(ns web-app.handlers.root)
 
 (def message "Hello World!")
 
