@@ -2,9 +2,9 @@ version: '3'
 services:
   server:
     image: erlang:24.0.1
-    working_dir: /usr/local/vermeer
+    working_dir: /usr/local/example
     volumes:
-      - .:/usr/local/vermeer
+      - .:/usr/local/example
     ports:
       - 8080:8080
     command: rebar3 clojerl run
