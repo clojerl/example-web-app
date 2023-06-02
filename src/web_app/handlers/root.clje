@@ -1,0 +1,13 @@
+(ns web-app.handlers.root)
+
+(def message "Hello World!")
+
+(defn init
+  [req state]
+  (println "Received request:" req)
+  (let [response (#erl cowboy_req/reply 200 #erl{} message req)]
+    #erl[:ok response state]))
+
+(defn terminate
+  [reason req state]
+  :ok)

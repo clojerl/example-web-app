@@ -1,6 +1,8 @@
 (ns web-app.sup)
 
-(defn start-link []
+(defn start-link
+  "https://erlang.org/doc/man/supervisor.html#start_link-3"
+  []
   (supervisor/start_link #erl[:local :web-app.sup]
                          :web-app.sup
                          #erl()))

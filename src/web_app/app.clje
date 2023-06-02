@@ -1,31 +1,37 @@
 (ns web-app.app
   (:require [web-app.sup :as sup]))
 
-(declare start-cowboy)
-
-(defn start [type args]
-  (start-cowboy)
-  (sup/start-link)
-  #erl[:ok (erlang/self)])
-
-(defn stop [state]
-  state)
-
 (defn ->list [s]
   (clj_rt/to_list.1 s))
 
 (defn ->proplist [m]
   (->list (map into-tuple m)))
 
-(def routes {:_ [["/" :web-app.root nil]]})
+(def routes {:_ [["/" :web-app.handlers.root nil]]})
 
 (defn- route->cowboy [[host handlers]]
   #erl[host (->list (map into-tuple handlers))])
 
 (defn start-cowboy []
   (let [routes (->list (map route->cowboy routes))
-        dispatch (#erl cowboy_router/compile routes)
-        acceptors 100
+        dispatch (cowboy_router/compile routes)
         port (->proplist {:port 8080})
-        opts (->proplist {:env (->proplist {:dispatch dispatch})})]
-    (#erl cowboy/start_http :web-app.listener acceptors port opts)))
+        opts #erl{:env #erl{:dispatch dispatch}}]
+    (println "Starting Cowboy server on port 8080")
+    ;; starts a Cowboy listener named :web-app.listener
+    (#erl cowboy/start_clear :web-app.listener port opts)))
+
+;; `application` behavior lifecycle callbacks
+;; http://erlang.org/doc/man/application.html
+
+(defn stop
+  "http://erlang.org/doc/apps/kernel/application.html#Module:stop-1"
+  [state]
+  state)
+
+(defn start
+  "http://erlang.org/doc/apps/kernel/application.html#Module:start-2"
+  [type args]
+  (start-cowboy)
+  (sup/start-link)
+  #erl[:ok (erlang/self)])

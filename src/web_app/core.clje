@@ -1,3 +1,0 @@
-(ns web-app.core)
-
-(defn x [] :hello)
